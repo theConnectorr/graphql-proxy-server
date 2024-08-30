@@ -11,10 +11,10 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 const globalRouter = require("./routes/global");
-app.use("/global", globalRouter);
+app.use("api/global", globalRouter);
 
 const userRouter = require("./routes/user");
-app.use("/user", userRouter);
+app.use("api/user", userRouter);
 
 app.use(express.static("./public"));
 
