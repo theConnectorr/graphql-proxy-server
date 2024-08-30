@@ -11,7 +11,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 const globalRouter = require("./routes/global");
-app.use("/", globalRouter);
+app.use("/global", globalRouter);
 
 const userRouter = require("./routes/user");
 app.use("/user", userRouter);
