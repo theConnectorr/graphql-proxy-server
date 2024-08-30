@@ -16,4 +16,6 @@ app.use("/", globalRouter);
 const userRouter = require("./routes/user");
 app.use("/user", userRouter);
 
+app.use(express.static("./public"));
+
 app.listen(PORT, () => console.log("I'm running at", PORT));

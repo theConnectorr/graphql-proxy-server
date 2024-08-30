@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+
+:root {
+    --column: 6;
+    --row: 10;
+    --border-color: violet;
+    --cell-color: #242424;
+    --text-color: white;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    height: 100vh;
+}
+
+
+.table {
+    margin: auto;
+    padding: 0;
+    background-color: black;
+    color: var(--text-color);
+    
+    width: 95%;
+    height: 95%;
+
+    border: 0.1rem var(--border-color) solid;
+
+    display: grid;
+    grid-template-columns: 5% 1fr;
+    grid-template-rows: 5% 1fr;
+    grid-gap: 0.1rem;
+    background-color: var(--border-color);
+}
+
+.table > * {
+    font-family: "Varela Round";
+}
+
+.table .blank {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    grid-gap: 0.1rem;
+}
+
+.table .blank div {
+    background-color: var(--cell-color);
+}
+
+.table .header {
+    display: grid;
+    grid-template-columns: repeat(var(--column), 1fr);
+    grid-template-rows: 1fr;
+    grid-gap: 0.1rem;
+}
+
+.table .period {
+    display: grid;
+    grid-template-rows: repeat(var(--row), 1fr);
+    grid-template-columns: 1fr;
+    grid-gap: 0.1rem;
+}
+
+.table .courses {
+    display: grid;
+    grid-template-rows: repeat(calc(2 * var(--row)), 1fr);
+    grid-template-columns: repeat(var(--column), 1fr);
+    grid-gap: 0.1rem;
+}
+
+.table * div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.table * div {
+    background-color: var(--cell-color);
+}
+
+.table .courses div {
+    box-sizing: border-box;
+    padding: 20px;
+}
