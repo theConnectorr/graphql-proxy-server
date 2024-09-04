@@ -30,7 +30,6 @@ document.body.insertAdjacentHTML(
 );
 
 const body = document.querySelector("tbody");
-console.log(body);
 
 let courses = [];
 
@@ -75,7 +74,6 @@ let courses = [];
 for (const course of body.children) {
   let courseObject = {};
   [...course.children].forEach((info, i) => {
-    console.log(info);
     switch (i % 7) {
       case 0: // id
         courseObject.id = info.innerText;
@@ -115,8 +113,6 @@ for (const course of body.children) {
   });
 }
 
-console.log(courses);
-
 function getBranch(str) {
   if (str === "P.cs2") return 2;
   return 1;
@@ -141,16 +137,31 @@ const getDay = {
   T7: 5,
 };
 
+courses.sort((a, b) => {
+  if (a.days < b.days)
+    return -1;
+  if (a.days > b.days)
+    return 1;
+  if (a.start < b.start)
+    return -1;
+  if (a.start > b.start)
+    return 1;
+  return 0;
+})
+
 var next = column;
 for (const course of courses) {
   const col = getDay[course.days];
   const id = course.id;
   const start = 2 * (Number(course.start) - 1);
   const end = 2 * Number(course.end);
-
-  for (let i = start; i < end; i++) area[i][col] = id;
-
-  for (let i = end; i < row * 2; ++i) area[i][col] = `b${next}`;
+  
+  for (let i = start; i < end; i++) {
+    area[i][col] = id;
+  }
+  for (let i = end; i < row * 2; i++) {
+    area[i][col] = `b${next}`;
+  }
   next++;
 
   const cell = document.createElement("div");
