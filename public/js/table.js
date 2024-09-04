@@ -30,6 +30,7 @@ document.body.insertAdjacentHTML(
 );
 
 const body = document.querySelector("tbody");
+console.log(body);
 
 let courses = [];
 
@@ -74,7 +75,8 @@ let courses = [];
 for (const course of body.children) {
   let courseObject = {};
   [...course.children].forEach((info, i) => {
-    switch (i % 5) {
+    console.log(info);
+    switch (i % 7) {
       case 0: // id
         courseObject.id = info.innerText;
         break;
@@ -113,6 +115,8 @@ for (const course of body.children) {
   });
 }
 
+console.log(courses);
+
 function getBranch(str) {
   if (str === "P.cs2") return 2;
   return 1;
@@ -150,7 +154,22 @@ for (const course of courses) {
   next++;
 
   const cell = document.createElement("div");
-  cell.innerHTML = course.name;
+  const wrapper = document.createElement("div");
+  wrapper.style.display = "block";
+  wrapper.style.width = "80%";
+  wrapper.style.padding = "0";
+  const name = document.createElement("div");
+  name.style.padding = "0";
+  name.innerHTML = course.name;
+  wrapper.appendChild(name);
+
+  if (course.room) {
+    const room = document.createElement("div");
+    room.innerHTML = course.room;
+    wrapper.appendChild(room);
+  }
+
+  cell.appendChild(wrapper);
   cell.id = course.id;
   cell.style.gridArea = course.id;
   table.appendChild(cell);
