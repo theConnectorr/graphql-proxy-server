@@ -38,7 +38,7 @@ const routes = [
     body: query.userProgessV2
   },
   {
-    url: "session_progress",
+    url: "/session_progress",
     body: query.userSessionProgress
   },
   {
