@@ -147,7 +147,7 @@ courses.sort((a, b) => {
   if (a.start > b.start)
     return 1;
   return 0;
-})
+});
 
 var next = column;
 for (const course of courses) {
@@ -165,17 +165,19 @@ for (const course of courses) {
   next++;
 
   const cell = document.createElement("div");
+
   const wrapper = document.createElement("div");
-  wrapper.style.display = "block";
-  wrapper.style.width = "80%";
-  wrapper.style.padding = "0";
+  wrapper.classList.add("wrapper");
+
   const name = document.createElement("div");
-  name.style.padding = "0";
+  name.classList.add("course-name");
   name.innerHTML = course.name;
+  
   wrapper.appendChild(name);
 
   if (course.room) {
     const room = document.createElement("div");
+    room.classList.add("course-room");
     room.innerHTML = course.room;
     wrapper.appendChild(room);
   }
@@ -197,6 +199,7 @@ for (const r of area) {
 
 for (const x in filters) {
   const blank = document.createElement("div");
+  blank.innerHTML = "chó Vỹ";
   blank.id = x;
   blank.style.gridArea = x;
   table.appendChild(blank);

@@ -3,7 +3,7 @@
 :root {
     --column: 6;
     --row: 10;
-    --border-color: violet;
+    --border-color: white;
     --cell-color: #242424;
     --text-color: white;
 }
@@ -12,9 +12,9 @@ body {
     margin: 0;
     padding: 0;
     background-color: black;
-    height: 100vh;
-}
 
+    height: 200vh;
+}
 
 .table {
     margin: auto;
@@ -23,7 +23,7 @@ body {
     color: var(--text-color);
     
     width: 95%;
-    height: 95%;
+    height: 90vh;
 
     border: 0.1rem var(--border-color) solid;
 
@@ -70,17 +70,29 @@ body {
     grid-gap: 0.1rem;
 }
 
-.table * div {
+.table > * > div {
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.table * div {
     background-color: var(--cell-color);
 }
 
-.table .courses div {
+.table > .courses > div {
     box-sizing: border-box;
+    padding: 20px;
+}
+
+.wrapper {
+    display: block;
+    width: 80%;
+    padding: 0;
+    text-align: center;
+}
+
+.course-name {
+    padding: 0;
+}
+
+.course-room {
     padding: 20px;
 }
