@@ -58,8 +58,32 @@ const userSkillStats = ({ username }) =>
 
 const userContestRatingInfo = ({ username }) =>
   Object({
-    query:
-      "\n    query userContestRankingInfo($username: String!) {\n  userContestRanking(username: $username) {\n    attendedContestsCount\n    rating\n    globalRanking\n    totalParticipants\n    topPercentage\n    badge {\n      name\n    }\n  }\n  userContestRankingHistory(username: $username) {\n    attended\n    trendDirection\n    problemsSolved\n    totalProblems\n    finishTimeInSeconds\n    rating\n    ranking\n    contest {\n      title\n      startTime\n    }\n  }\n}\n    ",
+    query: `
+    query userContestRankingInfo($username: String!) {
+      userContestRanking(username: $username) {
+        attendedContestsCount
+        rating
+        globalRanking
+        totalParticipants
+        topPercentage
+        badge {
+          name
+        }
+      }
+      userContestRankingHistory(username: $username, attended: true) {
+        attended
+        trendDirection
+        problemsSolved
+        totalProblems
+        finishTimeInSeconds
+        rating
+        ranking
+        contest {
+          title
+          startTime
+        }
+      }
+    }`,
     variables: {
       username: username,
     },
@@ -127,5 +151,5 @@ module.exports = {
   userSessionProgress,
   userBadges,
   userProfileCalendar,
-  userRecentAcSubmissions
+  userRecentAcSubmissions,
 };

@@ -199,7 +199,6 @@ for (const r of area) {
 
 for (const x in filters) {
   const blank = document.createElement("div");
-  blank.innerHTML = "chó Vỹ";
   blank.id = x;
   blank.style.gridArea = x;
   table.appendChild(blank);
