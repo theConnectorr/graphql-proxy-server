@@ -29,88 +29,91 @@ document.body.insertAdjacentHTML(
 </div>`
 );
 
-const body = document.querySelector("tbody");
+const bodies = document.querySelectorAll("tbody");
+const body = bodies[0];
 
 let courses = [];
 
-// for (const course of body.children) {
-//   let courseObject = {};
-//   [...course.children].forEach((info, i) => {
-//     switch (i % 5) {
-//       case 0: // id
-//         courseObject.id = info.innerText;
-//         break;
-//       case 1: // name
-//         courseObject.name = info.innerText;
-//         break;
-//       case 2: {
-//         const splitted = info.innerText.split("/");
-//         if (splitted.length > 1) courseObject.group = splitted[1];
-//         courseObject.class = splitted[0];
-//         break;
-//       }
-//       case 3:
-//         break;
-//       case 4: {
-//         const splitted = info.innerText.split("-");
-//         if (splitted.length > 2) {
-//           const roomSplit = splitted[2].split(":");
-//           courseObject.branch = getBranch(roomSplit[0]);
-//           courseObject.room = roomSplit[1];
-//         }
-
-//         const split1 = splitted[0].split("(");
-
-//         courseObject.days = split1[0];
-//         courseObject.start = split1[1];
-//         courseObject.end = splitted[1].split(")")[0];
-//         courses.push(courseObject);
-//         break;
-//       }
-//     }
-//   });
-// }
-
-for (const course of body.children) {
-  let courseObject = {};
-  [...course.children].forEach((info, i) => {
-    switch (i % 7) {
-      case 0: // id
-        courseObject.id = info.innerText;
-        break;
-      case 1: // name
-        courseObject.name = info.innerText;
-        break;
-      case 2: {
-        const splitted = info.innerText.split("/");
-        if (splitted.length > 1) courseObject.group = splitted[1];
-        courseObject.class = splitted[0];
-        break;
-      }
-      case 3:
-        break;
-      case 4:
-        break;
-      case 5: {
-        const splitted = info.innerText.split("-");
-        if (splitted.length > 2) {
-          const roomSplit = splitted[2].split(":");
-          courseObject.branch = getBranch(roomSplit[0]);
-          courseObject.room = roomSplit[1];
+if (bodies.length === 2) {
+  for (const course of body.children) {
+    let courseObject = {};
+    [...course.children].forEach((info, i) => {
+      switch (i % 5) {
+        case 0: // id
+          courseObject.id = info.innerText;
+          break;
+        case 1: // name
+          courseObject.name = info.innerText;
+          break;
+        case 2: {
+          const splitted = info.innerText.split("/");
+          if (splitted.length > 1) courseObject.group = splitted[1];
+          courseObject.class = splitted[0];
+          break;
         }
+        case 3:
+          break;
+        case 4: {
+          const splitted = info.innerText.split("-");
+          if (splitted.length > 2) {
+            const roomSplit = splitted[2].split(":");
+            courseObject.branch = getBranch(roomSplit[0]);
+            courseObject.room = roomSplit[1];
+          }
 
-        const split1 = splitted[0].split("(");
+          const split1 = splitted[0].split("(");
 
-        courseObject.days = split1[0];
-        courseObject.start = split1[1];
-        courseObject.end = splitted[1].split(")")[0];
-        courses.push(courseObject);
-        break;
+          courseObject.days = split1[0];
+          courseObject.start = split1[1];
+          courseObject.end = splitted[1].split(")")[0];
+          courses.push(courseObject);
+          break;
+        }
       }
-      case 6:
-        break;
-    }
-  });
+    });
+  }
+} else {
+  for (const course of body.children) {
+    let courseObject = {};
+    [...course.children].forEach((info, i) => {
+      switch (i % 7) {
+        case 0: // id
+          courseObject.id = info.innerText;
+          break;
+        case 1: // name
+          courseObject.name = info.innerText;
+          break;
+        case 2: {
+          const splitted = info.innerText.split("/");
+          if (splitted.length > 1) courseObject.group = splitted[1];
+          courseObject.class = splitted[0];
+          break;
+        }
+        case 3:
+          break;
+        case 4:
+          break;
+        case 5: {
+          const splitted = info.innerText.split("-");
+          if (splitted.length > 2) {
+            const roomSplit = splitted[2].split(":");
+            courseObject.branch = getBranch(roomSplit[0]);
+            courseObject.room = roomSplit[1];
+          }
+
+          const split1 = splitted[0].split("(");
+
+          courseObject.days = split1[0];
+          courseObject.start = +split1[1];
+          courseObject.end = +splitted[1].split(")")[0];
+          courses.push(courseObject);
+          break;
+        }
+        case 6:
+          break;
+      }
+    });
+  }
 }
 
 function getBranch(str) {
@@ -151,8 +154,10 @@ courses.sort((a, b) => {
 
 var next = column;
 for (const course of courses) {
+  const commonId = course.id + course.class
+
   const col = getDay[course.days];
-  const id = course.id;
+  const id = commonId;
   const start = 2 * (Number(course.start) - 1);
   const end = 2 * Number(course.end);
   
@@ -183,8 +188,9 @@ for (const course of courses) {
   }
 
   cell.appendChild(wrapper);
-  cell.id = course.id;
-  cell.style.gridArea = course.id;
+
+  cell.id = commonId;
+  cell.style.gridArea = commonId;
   table.appendChild(cell);
 }
 
