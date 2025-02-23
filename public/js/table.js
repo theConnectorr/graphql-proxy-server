@@ -56,7 +56,7 @@ if (bodies.length === 2) {
         case 4: {
           const splitted = info.innerText.split("-");
           if (splitted.length > 2) {
-            const roomSplit = splitted[2].split(":");
+            const roomSplit = splitted[2].split(/\.(.*)/);
             courseObject.branch = getBranch(roomSplit[0]);
             courseObject.room = roomSplit[1];
           }
@@ -96,7 +96,7 @@ if (bodies.length === 2) {
         case 5: {
           const splitted = info.innerText.split("-");
           if (splitted.length > 2) {
-            const roomSplit = splitted[2].split(":");
+            const roomSplit = splitted[2].split(/\.(.*)/);
             courseObject.branch = getBranch(roomSplit[0]);
             courseObject.room = roomSplit[1];
           }
